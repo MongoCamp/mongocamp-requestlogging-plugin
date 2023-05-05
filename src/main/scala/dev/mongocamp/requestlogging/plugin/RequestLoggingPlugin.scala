@@ -2,7 +2,7 @@ package dev.mongocamp.requestlogging.plugin
 
 import akka.actor.Props
 import com.typesafe.scalalogging.LazyLogging
-import dev.mongocamp.requestlogging.plugin.listener.{DatabaseRequestLoggingElement, RequestLoggingActor}
+import dev.mongocamp.requestlogging.plugin.listener.{ DatabaseRequestLoggingElement, RequestLoggingActor }
 import dev.mongocamp.server.database.MongoDatabase
 import dev.mongocamp.server.event.EventSystem
 import dev.mongocamp.server.event.http.HttpRequestEvent
@@ -12,8 +12,8 @@ import dev.mongocamp.server.service.ConfigurationService
 import org.mongodb.scala.bson.codecs.Macros._
 
 object RequestLoggingPlugin extends ServerPlugin with LazyLogging {
-  lazy val ConfigKeyRequestLogging           = "REQUESTLOGGING_ENABLED"
-  
+  lazy val ConfigKeyRequestLogging = "REQUESTLOGGING_ENABLED"
+
   override def activate(): Unit = {
     ConfigurationService.registerConfig(ConfigKeyRequestLogging, MongoCampConfiguration.confTypeBoolean, needsRestartForActivation = true)
     MongoDatabase.addToProvider(classOf[DatabaseRequestLoggingElement])
@@ -22,6 +22,5 @@ object RequestLoggingPlugin extends ServerPlugin with LazyLogging {
       EventSystem.eventStream.subscribe(requestLoggingActor, classOf[HttpRequestEvent])
     }
   }
-
 
 }

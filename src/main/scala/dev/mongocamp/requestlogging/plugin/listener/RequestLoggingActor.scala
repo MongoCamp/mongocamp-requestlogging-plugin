@@ -5,11 +5,9 @@ import com.typesafe.scalalogging.LazyLogging
 import dev.mongocamp.driver.mongodb._
 import dev.mongocamp.requestlogging.plugin.database.RequestLoggingDatabase
 import dev.mongocamp.server.BuildInfo
-import dev.mongocamp.server.event.http.{HttpRequestCompletedEvent, HttpRequestStartEvent}
+import dev.mongocamp.server.event.http.{ HttpRequestCompletedEvent, HttpRequestStartEvent }
 
 import java.net.InetAddress
-
-
 
 private[requestlogging] class RequestLoggingActor extends Actor with LazyLogging {
   def receive: Receive = {
